@@ -43,11 +43,8 @@ if edge_history:
     # Delete the edge_history.txt file
     edge_file.unlink()
 
-    print("Edge history saved to", zip_file)
 else:
     output_file = Path(temp_dir) / "browser_history.txt"
 
     with open(output_file, "w", encoding="utf-8") as file:
         file.write("Microsoft Edge is not found/used on this PC.")
-    
-    print("Microsoft Edge is not found/used on this PC. Output file:", output_file)
